@@ -1,6 +1,8 @@
 {
   "version": 2,
-  "cli": { "defaultCollection": "@nrwl/nest" },
+  "cli": {
+    "defaultCollection": "@nrwl/nest"
+  },
   "defaultProject": "api",
   "projects": {
     "api": {
@@ -8,14 +10,28 @@
       "sourceRoot": "apps/api/src",
       "projectType": "application",
       "targets": {
+        "deploy": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "node_modules/.bin/nx build api",
+              "docker build -f ./apps/api/Dockerfile . -t nrwl-with-docker-api"
+            ],
+            "parallel": false
+          }
+        },
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/api",
             "main": "apps/api/src/main.ts",
             "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"],
+            "assets": [
+              "apps/api/src/assets"
+            ],
             "generatePackageJson": true
           },
           "configurations": {
@@ -34,15 +50,23 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": { "buildTarget": "api:build" }
+          "options": {
+            "buildTarget": "api:build"
+          }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["apps/api/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": [
+              "apps/api/**/*.ts"
+            ]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/api"],
+          "outputs": [
+            "coverage/apps/api"
+          ],
           "options": {
             "jestConfig": "apps/api/jest.config.js",
             "passWithNoTests": true
@@ -55,14 +79,28 @@
       "sourceRoot": "apps/html/src",
       "projectType": "application",
       "targets": {
+        "deploy": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "node_modules/.bin/nx build html",
+              "docker build -f ./apps/html/Dockerfile . -t nrwl-with-docker-html"
+            ],
+            "parallel": false
+          }
+        },
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/html",
             "main": "apps/html/src/main.ts",
             "tsConfig": "apps/html/tsconfig.app.json",
-            "assets": ["apps/html/src/assets"],
+            "assets": [
+              "apps/html/src/assets"
+            ],
             "generatePackageJson": true
           },
           "configurations": {
@@ -81,15 +119,23 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": { "buildTarget": "html:build" }
+          "options": {
+            "buildTarget": "html:build"
+          }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["apps/html/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": [
+              "apps/html/**/*.ts"
+            ]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/html"],
+          "outputs": [
+            "coverage/apps/html"
+          ],
           "options": {
             "jestConfig": "apps/html/jest.config.js",
             "passWithNoTests": true
@@ -104,11 +150,17 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/todos/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": [
+              "libs/todos/**/*.ts"
+            ]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/todos"],
+          "outputs": [
+            "coverage/libs/todos"
+          ],
           "options": {
             "jestConfig": "libs/todos/jest.config.js",
             "passWithNoTests": true

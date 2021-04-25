@@ -1,0 +1,18 @@
+version: '3.8'
+networks: 
+    nrwl-with-docker: 
+services:
+  html:
+    image: nrwl-with-docker-html
+    environment:
+      - apiPath=http://nrwl-with-docker-api:3333
+    ports:
+      - '8080:3334'
+    networks: 
+    - nrwl-with-docker
+  api:
+    image: nrwl-with-docker-api
+    ports:
+      - '8081:3333'
+    networks: 
+        - nrwl-with-docker
